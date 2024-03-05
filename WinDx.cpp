@@ -1,8 +1,9 @@
-﻿// WinDx.cpp : 애플리케이션에 대한 진입점을 정의합니다.
-//
+﻿// WinDx.cpp : 애플리케이션에 대한 진입점을 정의합니다. 
 
 #include "framework.h"
-#include "WinDx.h"
+#include "WinDx.h" 
+#include <d3dx9.h> 
+#include <d3d9.h> 
 
 #define MAX_LOADSTRING 100
 
@@ -11,12 +12,36 @@ HINSTANCE hInst;                                // 현재 인스턴스입니다.
 WCHAR szTitle[MAX_LOADSTRING];                  // 제목 표시줄 텍스트입니다.
 WCHAR szWindowClass[MAX_LOADSTRING];            // 기본 창 클래스 이름입니다. 
 HWND g_hWnd;
+LPDIRECT3D9         g_pD3D = NULL; 
+LPDIRECT3DDEVICE9   g_d3dDevice = NULL; 
+
 
 // 이 코드 모듈에 포함된 함수의 선언을 전달합니다:
 ATOM                MyRegisterClass(HINSTANCE hInstance);
 BOOL                InitInstance(HINSTANCE, int);
 LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
-INT_PTR CALLBACK    About(HWND, UINT, WPARAM, LPARAM);
+INT_PTR CALLBACK    About(HWND, UINT, WPARAM, LPARAM); 
+
+HRESULT InitD3D(HWND hWnd)
+{
+    if (NULL == (g_pD3D = Direct3DCreate9(D3D_SDK_VERSION)))
+        return E_FAIL; 
+
+    D3DPRESENT_PARAMETERS d3dpp; 
+    ZeroMemory(&d3dpp, sizeof(d3dpp)); 
+    d3dpp.Windowed = TRUE; 
+    d3dpp.SwapEffect = D3DSWAPEFFECT_DISCARD; 
+    d3dpp.BackBufferFormat = D3DFMT_UNKNOWN; 
+
+    if (FAILED(g_pD3D->CreateDevice(D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, hWnd, 
+        D3DCREATE_SOFTWARE_VERTEXPROCESSING, &d3dpp, &g_d3dDevice)))
+    {
+        return E_FAIL; 
+    }
+
+    return S_OK; 
+}
+
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
                      _In_opt_ HINSTANCE hPrevInstance,
@@ -39,7 +64,9 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         return FALSE;
     }
 
-    MSG msg;
+    MSG msg; 
+
+    InitD3D(g_hWnd); 
 
     // 기본 메시지 루프입니다:
     while (true)
