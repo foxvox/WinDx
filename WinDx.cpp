@@ -11,9 +11,9 @@
 HINSTANCE hInst;                                // 현재 인스턴스입니다.
 WCHAR szTitle[MAX_LOADSTRING];                  // 제목 표시줄 텍스트입니다.
 WCHAR szWindowClass[MAX_LOADSTRING];            // 기본 창 클래스 이름입니다. 
-HWND g_hWnd;
+HWND                g_hWnd;
 LPDIRECT3D9         g_pD3D = NULL; 
-LPDIRECT3DDEVICE9   g_d3dDevice = NULL; 
+LPDIRECT3DDEVICE9   g_pd3dDevice = NULL; 
 
 
 // 이 코드 모듈에 포함된 함수의 선언을 전달합니다:
@@ -34,7 +34,7 @@ HRESULT InitD3D(HWND hWnd)
     d3dpp.BackBufferFormat = D3DFMT_UNKNOWN; 
 
     if (FAILED(g_pD3D->CreateDevice(D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, hWnd, 
-        D3DCREATE_SOFTWARE_VERTEXPROCESSING, &d3dpp, &g_d3dDevice)))
+        D3DCREATE_SOFTWARE_VERTEXPROCESSING, &d3dpp, &g_pd3dDevice)))
     {
         return E_FAIL; 
     }
@@ -42,6 +42,37 @@ HRESULT InitD3D(HWND hWnd)
     return S_OK; 
 }
 
+VOID Render()
+{
+    if (NULL == g_pd3dDevice)
+        return; 
+
+    g_pd3dDevice->Clear(0, NULL, D3DCLEAR_TARGET, D3DCOLOR_XRGB(0, 100, 150), 1.0f, 0);  
+
+    if (SUCCEEDED(g_pd3dDevice->BeginScene()))
+    {
+
+
+
+
+        g_pd3dDevice->EndScene(); 
+    }
+
+    g_pd3dDevice->Present(NULL, NULL, NULL, NULL); 
+}
+
+VOID Cleanup()
+{
+    if (g_pd3dDevice != NULL)
+    {
+        g_pd3dDevice->Release();
+    }        
+
+    if (g_pD3D != NULL)
+    {
+        g_pD3D->Release();
+    }        
+}
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
                      _In_opt_ HINSTANCE hPrevInstance,
@@ -84,6 +115,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         else
         {
             // 업데이트 & 렌더링 
+            Render(); 
         }
     }
 
@@ -184,10 +216,14 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             PAINTSTRUCT ps;
             HDC hdc = BeginPaint(hWnd, &ps);
             // TODO: 여기에 hdc를 사용하는 그리기 코드를 추가합니다...
+
+            Render(); 
+            
             EndPaint(hWnd, &ps);
         }
         break;
     case WM_DESTROY:
+        Cleanup(); 
         PostQuitMessage(0);
         break;
     default:
