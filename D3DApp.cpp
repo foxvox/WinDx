@@ -1,7 +1,10 @@
 #include "D3DApp.h"
 
-D3DApp::D3DApp()
+D3DApp::D3DApp() 
 {
+    m_pD3D = NULL; 
+    m_pd3dDevice = NULL; 
+    m_hWnd = NULL; 
 }
 
 D3DApp::~D3DApp()
