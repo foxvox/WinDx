@@ -32,6 +32,11 @@ HRESULT D3DApp::InitD3D(HWND hWnd)
     return S_OK;
 }
 
+void D3DApp::UpDate()
+{
+    OnUpdate();
+}
+
 void D3DApp::Reder()
 {
     if (NULL == m_pd3dDevice)
@@ -48,11 +53,6 @@ void D3DApp::Reder()
 
     m_pd3dDevice->Present(NULL, NULL, NULL, NULL);
 
-}
-
-void D3DApp::UpDate()
-{
-    OnUpdate(); 
 }
 
 void D3DApp::Cleanup()
