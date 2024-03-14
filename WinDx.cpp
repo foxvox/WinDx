@@ -14,6 +14,7 @@ WCHAR szWindowClass[MAX_LOADSTRING];            // 기본 창 클래스 이름�
 HWND                g_hWnd;
 LPDIRECT3D9         g_pD3D = NULL; 
 LPDIRECT3DDEVICE9   g_pd3dDevice = NULL; 
+Game1 g_Game1; 
 
 
 // 이 코드 모듈에 포함된 함수의 선언을 전달합니다:
@@ -51,10 +52,6 @@ VOID Render()
 
     if (SUCCEEDED(g_pd3dDevice->BeginScene()))
     {
-
-
-
-
         g_pd3dDevice->EndScene(); 
     }
 
@@ -95,9 +92,11 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         return FALSE;
     }
 
+    g_Game1.InitD3D(g_hWnd); 
+
     MSG msg; 
 
-    InitD3D(g_hWnd); 
+    // InitD3D(g_hWnd); 
 
     // 기본 메시지 루프입니다:
     while (true)
@@ -115,14 +114,13 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         else
         {
             // 업데이트 & 렌더링 
-            Render(); 
+            g_Game1.UpDate(); 
+            g_Game1.Render();            
         }
     }
 
     return (int) msg.wParam;
 }
-
-
 
 //
 //  함수: MyRegisterClass()

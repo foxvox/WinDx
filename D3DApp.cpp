@@ -30,7 +30,7 @@ HRESULT D3DApp::InitD3D(HWND hWnd)
         return E_FAIL;
     } 
 
-    OnInit(); 
+    OnInit();  
 
     return S_OK;
 }
@@ -40,7 +40,7 @@ void D3DApp::UpDate()
     OnUpdate();
 }
 
-void D3DApp::Reder()
+void D3DApp::Render()
 {
     if (NULL == m_pd3dDevice)
         return;

@@ -16,7 +16,7 @@ protected:
 
 public:
 	HRESULT InitD3D(HWND hWnd); 
-	void Reder(); 
+	void Render(); 
 	void UpDate(); 
 	void Cleanup(); 
 
