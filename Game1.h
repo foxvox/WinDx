@@ -1,17 +1,11 @@
 #pragma once
 #include "D3DApp.h"
-
-struct CUSTOMVERTEX
-{
-	FLOAT x, y, z, rhw; 
-	DWORD color; 
-};
-
-#define D3DFVF_CUSTOMVERTEX (D3DFVF_XYZRHW|D3DFVF_DIFFUSE)
+#include "Triangle.h" 
 
 class Game1 : public D3DApp 
 {
 private:
+	Triangle m_Triangle; 
 	LPDIRECT3DVERTEXBUFFER9 m_pVB; 
 
 	virtual void OnInit();
