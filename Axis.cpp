@@ -24,7 +24,7 @@ void Axis::OnInit(LPDIRECT3DDEVICE9 pd3dDevice)
 		{0.0f, 0.0f,  3.0f, D3DCOLOR_RGBA(0, 255, 255, 255)}
 	}; 
 
-	m_pd3dDevice->CreateVertexBuffer(3 * sizeof(CUSTOMVERTEX), 0, D3DFVF_CUSTOMVERTEX,
+	m_pd3dDevice->CreateVertexBuffer(sizeof(CUSTOMVERTEX), 0, D3DFVF_CUSTOMVERTEX,
 		D3DPOOL_DEFAULT, &m_pVB, NULL);
 
 	VOID* pVertices;

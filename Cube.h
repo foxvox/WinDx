@@ -1,11 +1,12 @@
 #pragma once
 #include <d3d9.h> 
+#include <d3dx9.h>
 
 #define D3DFVF_CUSTOMVERTEX (D3DFVF_XYZ|D3DFVF_DIFFUSE)
 
 struct CUSTOMVERTEX
 {
-	FLOAT x, y, z;
+	D3DXVECTOR3 position; 
 	DWORD color;
 };
 
