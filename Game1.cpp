@@ -35,8 +35,8 @@ void Game1::OnInit()
 	m_Axis.OnInit(m_pd3dDevice);	
 
 	// D3DXCreateBox(m_pd3dDevice, 2.0f, 2.0f, 2.0f, &m_pBoxMesh, NULL); 
-	D3DXCreateTeapot(m_pd3dDevice, &m_pTeapotMesh, NULL); 
-}
+	D3DXCreateTeapot(m_pd3dDevice, &m_pTeapotMesh, NULL);  
+} 
 
 void Game1::OnUpdate()
 {
