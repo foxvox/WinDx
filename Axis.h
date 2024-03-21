@@ -3,14 +3,6 @@
 #include <d3dx9.h> 
 #include <d3dx9math.h> 
 
-struct CUSTOMVERTEX
-{
-	FLOAT x, y, z;
-	DWORD color;
-};
-
-#define D3DFVF_CUSTOMVERTEX (D3DFVF_XYZ|D3DFVF_DIFFUSE)
-
 class Axis
 {
 private:

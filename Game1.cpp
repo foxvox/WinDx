@@ -33,6 +33,7 @@ void Game1::OnInit()
 	m_pd3dDevice->SetViewport(&vp); 
 
 	m_Axis.OnInit(m_pd3dDevice);
+	m_Cube.OnInit(m_pd3dDevice); 
 }
 
 void Game1::OnUpdate()
@@ -42,16 +43,18 @@ void Game1::OnUpdate()
 void Game1::OnRender()
 {
 	m_Axis.OnRender(); 
-	 
+	m_Cube.OnRender(); 	 
 }
 
 void Game1::OnRelease()
 {
 	m_Axis.OnRelease(); 
+	m_Cube.OnRelease(); 
 }
 
 Game1::Game1()
-{	 
+{
+	m_pVB = NULL;
 }
 
 Game1::~Game1()

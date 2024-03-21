@@ -1,14 +1,7 @@
 #pragma once
 #include <d3d9.h> 
 #include <d3dx9.h>
-
-#define D3DFVF_CUSTOMVERTEX (D3DFVF_XYZ|D3DFVF_DIFFUSE)
-
-struct CUSTOMVERTEX
-{
-	D3DXVECTOR3 position; 
-	DWORD color;
-};
+#include <d3dx9math.h>
 
 class Cube
 {
