@@ -36,8 +36,8 @@ void Game1::OnInit()
 
 	//D3DXCreateBox(m_pd3dDevice, 2.0f, 2.0f, 2.0f, &m_pBoxMesh, NULL); 
 	//D3DXCreateTeapot(m_pd3dDevice, &m_pTeapotMesh, NULL);  
-	//D3DXCreateSphere(m_pd3dDevice, 2.0f, 20, 20, &m_pSphereMesh, NULL);	
-	D3DXCreateCylinder(m_pd3dDevice, 1.0f, 1.0f, 2.0f, 30, 10, &m_pCylinderMesh, NULL); 
+	D3DXCreateSphere(m_pd3dDevice, 2.0f, 30, 30, &m_pSphereMesh, NULL);	
+	//D3DXCreateCylinder(m_pd3dDevice, 1.0f, 1.0f, 2.0f, 30, 10, &m_pCylinderMesh, NULL); 
 } 
 
 void Game1::OnUpdate()
@@ -54,16 +54,16 @@ void Game1::OnRender()
 
 	//m_pBoxMesh->DrawSubset(0); 
 	//m_pTeapotMesh->DrawSubset(0); 
-	//m_pSphereMesh->DrawSubset(0); 
-	m_pCylinderMesh->DrawSubset(0); 
+	m_pSphereMesh->DrawSubset(0); 
+	//m_pCylinderMesh->DrawSubset(0); 
 }
 
 void Game1::OnRelease()
 {
 	//m_pBoxMesh->Release(); 
 	//m_pTeapotMesh->Release();
-	//m_pSphereMesh->Release(); 
-	m_pCylinderMesh->Release(); 
+	m_pSphereMesh->Release(); 
+	//m_pCylinderMesh->Release(); 
 	m_Axis.OnRelease(); 	
 }
 
