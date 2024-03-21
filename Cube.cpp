@@ -62,6 +62,7 @@ void Cube::OnInit(LPDIRECT3DDEVICE9 pd3dDevice)
 void Cube::OnRender()
 {
 	m_pd3dDevice->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME); 
+	m_pd3dDevice->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
 
 	D3DXMATRIX matWorld;
 	D3DXMatrixIdentity(&matWorld); 
