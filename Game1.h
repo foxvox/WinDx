@@ -1,7 +1,6 @@
 #pragma once
 #include "D3DApp.h"
 #include "Axis.h" 
-#include "Cube.h" 
 
 class Game1 : public D3DApp 
 {
@@ -12,7 +11,11 @@ private:
 	
 	D3DXVECTOR3 m_Eye, m_At, m_Up; 
 	Axis m_Axis; 	
-	Cube m_Cube; 
+	
+	LPD3DXMESH m_pBoxMesh; 
+	LPD3DXMESH m_pSphereMesh; 
+	LPD3DXMESH m_pTeapotMesh;
+	LPD3DXMESH m_pCylinderMesh;
 
 	virtual void OnInit();
 	virtual void OnUpdate();

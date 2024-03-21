@@ -43,7 +43,7 @@ HRESULT InitD3D(HWND hWnd)
     return S_OK; 
 }
 
-VOID Render()
+static VOID Render()
 {
     if (NULL == g_pd3dDevice)
         return; 
@@ -58,7 +58,7 @@ VOID Render()
     g_pd3dDevice->Present(NULL, NULL, NULL, NULL); 
 }
 
-VOID Cleanup()
+static VOID Cleanup()
 {
     if (g_pd3dDevice != NULL)
     {
@@ -161,7 +161,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    hInst = hInstance; // 인스턴스 핸들을 전역 변수에 저장합니다.
 
    HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
-      CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr); 
+      CW_USEDEFAULT, 0, 900, 800, nullptr, nullptr, hInstance, nullptr); 
 
    g_hWnd = hWnd;
 

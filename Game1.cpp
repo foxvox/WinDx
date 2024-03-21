@@ -28,12 +28,14 @@ void Game1::OnInit()
 	D3DXMatrixLookAtLH(&m_matView, &m_Eye, &m_At, &m_Up);
 	m_pd3dDevice->SetTransform(D3DTS_VIEW, &m_matView);
 
-	D3DXMatrixPerspectiveFovLH(&m_matProj, D3DX_PI / 4, 1.0f, -4.0f, 4.0f); 
+	D3DXMatrixPerspectiveFovLH(&m_matProj, D3DX_PI / 4, 1.0f, -5.0f, 5.0f); 
 	m_pd3dDevice->SetTransform(D3DTS_PROJECTION, &m_matProj); 
 	m_pd3dDevice->SetViewport(&vp); 
 
-	m_Axis.OnInit(m_pd3dDevice);
-	m_Cube.OnInit(m_pd3dDevice); 
+	m_Axis.OnInit(m_pd3dDevice);	
+
+	// D3DXCreateBox(m_pd3dDevice, 2.0f, 2.0f, 2.0f, &m_pBoxMesh, NULL); 
+	D3DXCreateTeapot(m_pd3dDevice, &m_pTeapotMesh, NULL); 
 }
 
 void Game1::OnUpdate()
@@ -42,14 +44,19 @@ void Game1::OnUpdate()
 
 void Game1::OnRender()
 {
-	m_Axis.OnRender(); 
-	m_Cube.OnRender(); 	 
+	m_Axis.OnRender(); 	
+
+	m_pd3dDevice->SetRenderState(D3DRS_LIGHTING, FALSE); 
+	m_pd3dDevice->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME);
+	m_pd3dDevice->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE); 
+
+	// m_pBoxMesh->DrawSubset(0); 
+	m_pTeapotMesh->DrawSubset(0); 
 }
 
 void Game1::OnRelease()
 {
-	m_Axis.OnRelease(); 
-	m_Cube.OnRelease(); 
+	m_Axis.OnRelease(); 	
 }
 
 Game1::Game1()
