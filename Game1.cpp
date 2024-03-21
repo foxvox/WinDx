@@ -28,7 +28,7 @@ void Game1::OnInit()
 	D3DXMatrixLookAtLH(&m_matView, &m_Eye, &m_At, &m_Up);
 	m_pd3dDevice->SetTransform(D3DTS_VIEW, &m_matView);
 
-	D3DXMatrixPerspectiveFovLH(&m_matProj, D3DX_PI / 4, 1.0f, 1.0f, 3.5f); 
+	D3DXMatrixPerspectiveFovLH(&m_matProj, D3DX_PI / 4, 1.0f, -1.0f, 3.5f); 
 	m_pd3dDevice->SetTransform(D3DTS_PROJECTION, &m_matProj); 
 	m_pd3dDevice->SetViewport(&vp); 
 

@@ -1,7 +1,7 @@
 #pragma once
-#include <d3d9.h>
-#include <d3dx9.h> 
-#include <d3dx9math.h> 
+#include <d3d9.h> 
+
+#define D3DFVF_CUSTOMVERTEX (D3DFVF_XYZ|D3DFVF_DIFFUSE)
 
 struct CUSTOMVERTEX
 {
@@ -9,19 +9,19 @@ struct CUSTOMVERTEX
 	DWORD color;
 };
 
-#define D3DFVF_CUSTOMVERTEX (D3DFVF_XYZ|D3DFVF_DIFFUSE)
-
-class Axis
+class Cube
 {
 private:
-	LPDIRECT3DDEVICE9 m_pd3dDevice; 
+	LPDIRECT3DDEVICE9 m_pd3dDevice;
 	LPDIRECT3DVERTEXBUFFER9 m_pVB; 
+	LPDIRECT3DINDEXBUFFER9 m_pIB; 
 
 public:
-	Axis();
-	~Axis(); 
 	void OnInit(LPDIRECT3DDEVICE9 pd3dDevice); 
 	void OnRender();
 	void OnRelease(); 
+
+	Cube(); 
+	~Cube(); 
 };
 
