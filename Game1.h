@@ -1,12 +1,16 @@
 #pragma once
 #include "D3DApp.h"
-#include "Triangle.h" 
+#include "Axis.h"; 
 
 class Game1 : public D3DApp 
 {
 private:
-	Triangle m_Triangle; 
+	D3DXMATRIX m_matView; 
+	D3DXMATRIX m_matProj; 
 	LPDIRECT3DVERTEXBUFFER9 m_pVB; 
+	
+	D3DXVECTOR3 m_Eye, m_At, m_Up; 
+	Axis m_Axis; 	
 
 	virtual void OnInit();
 	virtual void OnUpdate();
@@ -14,7 +18,7 @@ private:
 	virtual void OnRelease();
 
 public:
-	Game1() {} 
-	~Game1() {} 
+	Game1();
+	~Game1();
 };
 

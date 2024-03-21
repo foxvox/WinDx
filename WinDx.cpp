@@ -14,8 +14,8 @@ WCHAR szWindowClass[MAX_LOADSTRING];            // 기본 창 클래스 이름�
 HWND                g_hWnd;
 LPDIRECT3D9         g_pD3D = NULL; 
 LPDIRECT3DDEVICE9   g_pd3dDevice = NULL; 
-Game1 g_Game1; 
 
+Game1               g_Game1; 
 
 // 이 코드 모듈에 포함된 함수의 선언을 전달합니다:
 ATOM                MyRegisterClass(HINSTANCE hInstance);
@@ -94,9 +94,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     g_Game1.InitD3D(g_hWnd); 
 
-    MSG msg; 
-
-    // InitD3D(g_hWnd); 
+    MSG msg;     
 
     // 기본 메시지 루프입니다:
     while (true)

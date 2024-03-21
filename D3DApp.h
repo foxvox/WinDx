@@ -1,6 +1,6 @@
 #pragma once
 #include <d3d9.h>
-#include "Triangle.h"   
+#include <d3dx9math.h>  
 
 class D3DApp
 {
