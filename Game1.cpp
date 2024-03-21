@@ -34,8 +34,8 @@ void Game1::OnInit()
 
 	m_Axis.OnInit(m_pd3dDevice);	
 
-	// D3DXCreateBox(m_pd3dDevice, 2.0f, 2.0f, 2.0f, &m_pBoxMesh, NULL); 
-	D3DXCreateTeapot(m_pd3dDevice, &m_pTeapotMesh, NULL);  
+	D3DXCreateBox(m_pd3dDevice, 2.0f, 2.0f, 2.0f, &m_pBoxMesh, NULL); 
+	//D3DXCreateTeapot(m_pd3dDevice, &m_pTeapotMesh, NULL);  
 } 
 
 void Game1::OnUpdate()
@@ -50,8 +50,8 @@ void Game1::OnRender()
 	m_pd3dDevice->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME);
 	m_pd3dDevice->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE); 
 
-	// m_pBoxMesh->DrawSubset(0); 
-	m_pTeapotMesh->DrawSubset(0); 
+	m_pBoxMesh->DrawSubset(0); 
+	//m_pTeapotMesh->DrawSubset(0); 
 }
 
 void Game1::OnRelease()
@@ -62,6 +62,10 @@ void Game1::OnRelease()
 Game1::Game1()
 {
 	m_pVB = NULL;
+	m_pBoxMesh = NULL;
+	m_pSphereMesh = NULL;
+	m_pTeapotMesh = NULL;
+	m_pCylinderMesh = NULL; 
 }
 
 Game1::~Game1()
