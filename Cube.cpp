@@ -75,6 +75,7 @@ void Cube::OnRender()
 	m_pd3dDevice->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, 8, 0, 12);
 
 	m_pd3dDevice->SetRenderState(D3DRS_LIGHTING, TRUE);
+	m_pd3dDevice->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
 }
 
 void Cube::OnRelease()
