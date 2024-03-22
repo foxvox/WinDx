@@ -10,6 +10,8 @@ struct CUSTOMVERTEX
 
 Axis::Axis()
 {
+	m_pd3dDevice = NULL; 
+	m_pVB = NULL; 
 }
 
 Axis::~Axis()
