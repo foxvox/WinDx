@@ -17,6 +17,8 @@ private:
 	LPD3DXMESH m_pTeapotMesh;
 	LPD3DXMESH m_pCylinderMesh;
 
+	float m_fScale; 
+
 	virtual void OnInit();
 	virtual void OnUpdate();
 	virtual void OnRender();
