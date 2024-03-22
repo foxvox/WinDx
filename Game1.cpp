@@ -13,8 +13,8 @@ void Game1::OnInit()
 	vp.MinZ		= 0.0f; 
 	vp.MaxZ		= 1.0f; 
 
-	m_Eye.x = 4.0f; 
-	m_Eye.y = 5.0f;
+	m_Eye.x = 0.0f; 
+	m_Eye.y = 0.0f;
 	m_Eye.z = -10.0f; 
 
 	m_At.x = 0.0f; 
@@ -28,7 +28,7 @@ void Game1::OnInit()
 	D3DXMatrixLookAtLH(&m_matView, &m_Eye, &m_At, &m_Up);
 	m_pd3dDevice->SetTransform(D3DTS_VIEW, &m_matView);
 
-	D3DXMatrixPerspectiveFovLH(&m_matProj, D3DX_PI / 4, 1.0f, -7.0f, 7.0f); 
+	D3DXMatrixPerspectiveFovLH(&m_matProj, D3DX_PI / 4, 1.0f, -8.0f, 8.0f); 
 	m_pd3dDevice->SetTransform(D3DTS_PROJECTION, &m_matProj); 
 	m_pd3dDevice->SetViewport(&vp); 
 
@@ -50,14 +50,13 @@ void Game1::OnUpdate()
 void Game1::OnRender()
 {
 	D3DXMATRIX matRotation; 
+	D3DXVECTOR3 v1(1.0f, 1.0f, 0.0f); 
 
 	m_Axis.OnRender(); 	
 
 	m_pd3dDevice->SetRenderState(D3DRS_LIGHTING, FALSE); 
 	m_pd3dDevice->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME); 
-	//D3DXMatrixRotationX(&matRotation, GetTickCount() * 0.004f); 
-	//D3DXMatrixRotationY(&matRotation, GetTickCount() * 0.004f);
-	D3DXMatrixRotationZ(&matRotation, GetTickCount64() * 0.004f);
+	D3DXMatrixRotationAxis(&matRotation, &v1, GetTickCount64() * 0.004f);
 	
 	m_pd3dDevice->SetTransform(D3DTS_WORLD, &matRotation);
 	m_pTeapotMesh->DrawSubset(0); 	
