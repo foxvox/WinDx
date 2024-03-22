@@ -13,7 +13,7 @@ void Game1::OnInit()
 	vp.MinZ		= 0.0f; 
 	vp.MaxZ		= 1.0f; 
 
-	m_Eye.x = 2.0f; 
+	m_Eye.x = 10.0f; 
 	m_Eye.y = 5.0f;
 	m_Eye.z = -10.0f; 
 
@@ -49,19 +49,15 @@ void Game1::OnUpdate()
 
 void Game1::OnRender()
 {
-	D3DXMATRIX matRotation; 
-	D3DXQUATERNION vQuaternion; 
-	D3DXVECTOR3 v1(1.0f, 1.0f, 0.0f); 
+	D3DXMATRIX matTranslation; 
 
 	m_Axis.OnRender(); 	
 
 	m_pd3dDevice->SetRenderState(D3DRS_LIGHTING, FALSE);
 	m_pd3dDevice->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME);
 
-	D3DXQuaternionRotationAxis(&vQuaternion, &v1, GetTickCount64() * 0.002f);
-	D3DXMatrixRotationQuaternion(&matRotation, &vQuaternion);	
-	
-	m_pd3dDevice->SetTransform(D3DTS_WORLD, &matRotation);
+	D3DXMatrixTranslation(&matTranslation, 2.5f, 0.0f, 2.0f); 
+	m_pd3dDevice->SetTransform(D3DTS_WORLD, &matTranslation);
 	m_pTeapotMesh->DrawSubset(0); 	
 }
 
