@@ -57,7 +57,7 @@ void Game1::OnRender()
 	m_pd3dDevice->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME); 
 	//D3DXMatrixRotationX(&matRotation, GetTickCount() * 0.004f); 
 	//D3DXMatrixRotationY(&matRotation, GetTickCount() * 0.004f);
-	D3DXMatrixRotationZ(&matRotation, GetTickCount() * 0.004f);
+	D3DXMatrixRotationZ(&matRotation, GetTickCount64() * 0.004f);
 	
 	m_pd3dDevice->SetTransform(D3DTS_WORLD, &matRotation);
 	m_pTeapotMesh->DrawSubset(0); 	
