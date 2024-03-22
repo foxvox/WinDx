@@ -50,13 +50,16 @@ void Game1::OnUpdate()
 void Game1::OnRender()
 {
 	D3DXMATRIX matRotation; 
-	D3DXVECTOR3 v1(1.0f, 1.0f, 0.0f); 
+	D3DXQUATERNION vQuaternion; 
+	D3DXVECTOR3 v1(1.0f, 1.0f, 1.0f); 
+
+	m_pd3dDevice->SetRenderState(D3DRS_LIGHTING, FALSE);
+	m_pd3dDevice->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME);
 
 	m_Axis.OnRender(); 	
 
-	m_pd3dDevice->SetRenderState(D3DRS_LIGHTING, FALSE); 
-	m_pd3dDevice->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME); 
-	D3DXMatrixRotationAxis(&matRotation, &v1, GetTickCount64() * 0.004f);
+	D3DXQuaternionRotationAxis(&vQuaternion, &v1, GetTickCount64() * 0.004f);
+	D3DXMatrixRotationQuaternion(&matRotation, &vQuaternion);	
 	
 	m_pd3dDevice->SetTransform(D3DTS_WORLD, &matRotation);
 	m_pTeapotMesh->DrawSubset(0); 	
