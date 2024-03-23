@@ -12,8 +12,6 @@ HINSTANCE hInst;                                // 현재 인스턴스입니다.
 WCHAR szTitle[MAX_LOADSTRING];                  // 제목 표시줄 텍스트입니다.
 WCHAR szWindowClass[MAX_LOADSTRING];            // 기본 창 클래스 이름입니다. 
 HWND                g_hWnd;
-LPDIRECT3D9         g_pD3D = NULL; 
-LPDIRECT3DDEVICE9   g_pd3dDevice = NULL; 
 
 Game1               g_Game1; 
 
@@ -23,54 +21,6 @@ BOOL                InitInstance(HINSTANCE, int);
 LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
 INT_PTR CALLBACK    About(HWND, UINT, WPARAM, LPARAM); 
 
-HRESULT InitD3D(HWND hWnd)
-{
-    if (NULL == (g_pD3D = Direct3DCreate9(D3D_SDK_VERSION)))
-        return E_FAIL; 
-
-    D3DPRESENT_PARAMETERS d3dpp; 
-    ZeroMemory(&d3dpp, sizeof(d3dpp)); 
-    d3dpp.Windowed = TRUE; 
-    d3dpp.SwapEffect = D3DSWAPEFFECT_DISCARD; 
-    d3dpp.BackBufferFormat = D3DFMT_UNKNOWN; 
-
-    if (FAILED(g_pD3D->CreateDevice(D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, hWnd, 
-        D3DCREATE_SOFTWARE_VERTEXPROCESSING, &d3dpp, &g_pd3dDevice)))
-    {
-        return E_FAIL; 
-    }
-
-    return S_OK; 
-}
-
-static VOID Render()
-{
-    if (NULL == g_pd3dDevice)
-        return; 
-
-    g_pd3dDevice->Clear(0, NULL, D3DCLEAR_TARGET, D3DCOLOR_XRGB(0, 100, 150), 1.0f, 0);  
-
-    if (SUCCEEDED(g_pd3dDevice->BeginScene()))
-    {
-        g_pd3dDevice->EndScene(); 
-    }
-
-    g_pd3dDevice->Present(NULL, NULL, NULL, NULL); 
-}
-
-static VOID Cleanup()
-{
-    if (g_pd3dDevice != NULL)
-    {
-        g_pd3dDevice->Release();
-    }        
-
-    if (g_pD3D != NULL)
-    {
-        g_pD3D->Release();
-    }        
-}
-
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
                      _In_opt_ HINSTANCE hPrevInstance,
                      _In_ LPWSTR    lpCmdLine,
@@ -79,9 +29,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     UNREFERENCED_PARAMETER(hPrevInstance);
     UNREFERENCED_PARAMETER(lpCmdLine);
 
-    // TODO: 여기에 코드를 입력합니다.
-
-    // 전역 문자열을 초기화합니다.
     LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
     LoadStringW(hInstance, IDC_WINDX, szWindowClass, MAX_LOADSTRING);
     MyRegisterClass(hInstance);
@@ -120,11 +67,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     return (int) msg.wParam;
 }
 
-//
-//  함수: MyRegisterClass()
-//
-//  용도: 창 클래스를 등록합니다.
-//
 ATOM MyRegisterClass(HINSTANCE hInstance)
 {
     WNDCLASSEXW wcex;
@@ -146,16 +88,6 @@ ATOM MyRegisterClass(HINSTANCE hInstance)
     return RegisterClassExW(&wcex);
 }
 
-//
-//   함수: InitInstance(HINSTANCE, int)
-//
-//   용도: 인스턴스 핸들을 저장하고 주 창을 만듭니다.
-//
-//   주석:
-//
-//        이 함수를 통해 인스턴스 핸들을 전역 변수에 저장하고
-//        주 프로그램 창을 만든 다음 표시합니다.
-//
 BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 {
    hInst = hInstance; // 인스턴스 핸들을 전역 변수에 저장합니다.
@@ -176,16 +108,6 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    return TRUE;
 }
 
-//
-//  함수: WndProc(HWND, UINT, WPARAM, LPARAM)
-//
-//  용도: 주 창의 메시지를 처리합니다.
-//
-//  WM_COMMAND  - 애플리케이션 메뉴를 처리합니다.
-//  WM_PAINT    - 주 창을 그립니다.
-//  WM_DESTROY  - 종료 메시지를 게시하고 반환합니다.
-//
-//
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
     switch (message)
@@ -210,14 +132,12 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     case WM_PAINT:
         {
             PAINTSTRUCT ps;
-            HDC hdc = BeginPaint(hWnd, &ps);
-            // TODO: 여기에 hdc를 사용하는 그리기 코드를 추가합니다...
-            Render();             
+            HDC hdc = BeginPaint(hWnd, &ps);           
             EndPaint(hWnd, &ps);
         }
         break;
     case WM_DESTROY:
-        Cleanup(); 
+        g_Game1.Cleanup(); 
         PostQuitMessage(0);
         break;
     default:
